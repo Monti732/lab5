@@ -1,32 +1,34 @@
 ﻿#include <iostream>
 #include <cstdlib>
 #include <ctime>
- 
+#include <math.h>
+
 using namespace std;
+
+void fullArrays(int* mas, int size) {
+	for (int i = 0; i < size; ++i) {
+		mas[i] = rand() % (size + 1) - (size / 2);
+	}
+}
+
+int sumOfSquares(int* mas, int size) {
+	int sum = 0;
+	for (int i = 0; i < size; ++i) {
+		sum += pow(mas[i], 2);
+	}
+	return sum;
+}
 
 int main() {
 	setlocale(LC_ALL, "ru");
-	int P[15]{};
-	int G[20]{};
+	const int sizeP = 15;
+	const int sizeG = 20;
+	int P[sizeP];
+	int G[sizeG];
 
-	srand(time(NULL)); // добавление зависимости от программного времени для функции rand(rand генератор случайных чисел)
+	srand(time(NULL));
+	fullArrays(P, sizeP);
+	fullArrays(G, sizeG);
 
-	for (int i = 0; i < 15; ++i) {
-		P[i] = rand() % 101;
-	}
-	for (int i = 0; i < 20; ++i) {
-		G[i] = rand() % 41 - 20;
-	}
-
-	int summP{}, summG{};
-
-	for (int i = 0; i < 15; ++i) {
-		summP += pow(P[i], 2);
-	}
-	for (int i = 0; i < 20; ++i) {
-		summG += pow(G[i], 2);
-	}
-
-	cout << "Сумма квадратов P = " << summP << endl;
-	cout << "Сумма квадратов G = " << summG << endl;
+	cout << sumOfSquares(P, sizeP) << '\n' << sumOfSquares(G, sizeG);
 }
